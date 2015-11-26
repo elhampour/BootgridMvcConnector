@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link href="~/Public/Lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/Public/Lib/jquery.bootgrid/dist/jquery.bootgrid.css" rel="stylesheet" />
+</head>
+<body>
+    <div>
+        <table id="grid-basic" class="table table-condensed table-hover table-striped">
+            <thead>
+                <tr>
+                    <th data-column-id="id" data-type="numeric" data-identifier="true">Id</th>
+                    <th data-column-id="firstname">FirstName</th>
+                    <th data-column-id="lastname">LastName</th>
+                    <th data-column-id="commands" data-formatter="commands" data-sortable="false">Actions</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+    <script src="~/Public/Lib/jquery/dist/jquery.js"></script>
+    <script src="~/Public/Lib/bootstrap/dist/js/bootstrap.js"></script>
+<script src="~/Public/Lib/jquery.bootgrid/dist/jquery.bootgrid.js"></script>
+    <script>
+        $(document).ready(function () {
+            var grid =$("#grid-basic").bootgrid({
+                ajax: true,
+                url:"/Home/get",
+                ajaxSettings: {
+                    method: "POST",
+                    cache: false
+                },
+                rowCount: [10, 20, 30, 40],
+                formatters: {
+                    "commands": function (column, row) {
+                        return "<button type=\"button\" class=\"btn btn-xs btn-default command-edit\" data-row-id=\"" + row.id + "\"><span class=\"fglyphicon glyphicon-pencil\"></span></button> " +
+                "<button type=\"button\" class=\"btn btn-xs btn-default command-delete\" data-row-id=\"" + row.id + "\"><span class=\"glyphicon glyphicon-remove\"></span></button>";
+                    }
+                }
+            }).on("loaded.rs.jquery.bootgrid", function () {
+                grid.find(".command-edit").on("click", function (e) {
+                    alert("You pressed edit on row: " + $(this).data("row-id"));
+                }).end().find(".command-delete").on("click", function (e) {
+                    alert("You pressed delete on row: " + $(this).data("row-id"));
+                });
+            });
+        });
+    </script>
+</body>
+</html>

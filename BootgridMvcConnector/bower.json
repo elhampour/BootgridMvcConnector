@@ -1,0 +1,18 @@
+{
+  "name": "BootgridMvcConnector",
+  "version": "1.0.0",
+  "homepage": "https://github.com/elhampour/BootgridMvcConnector",
+  "authors": [
+    "ehsan.elhampour@gmail.com"
+  ],
+  "description": "Jquery boot grid with mvc connector",
+  "moduleType": [
+    "globals"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "bootstrap": "~3.3.6",
+    "jquery": "~2.1.4",
+    "jquery.bootgrid": "~1.3.1"
+  }
+}
